@@ -69,7 +69,7 @@ count = 10
 dummyRadius = 0.02
 for i = 1,count do
     objectHandles = "dummyHandle_"..i
-    dummyObjectName = "dummy13_"..i
+    dummyObjectName = "dummy24_"..i
     objectHandles = sim.createDummy(dummyRadius,nil)
     sim.setObjectName(objectHandles,dummyObjectName)
     -- assign dummys' position
@@ -77,15 +77,36 @@ for i = 1,count do
 end
 
 
+
+-- Step 4.1: Create a proximity sensor with range of 100
 function sysCall_init()
 
     options = 1
     intParam = {0,0,0,0,0,0,0,0}
-    floatParam = {0,100,0,0,0,0,0,0,0,0,0,0,0,0,0}
+    floatParam = {0,5,0,0,0,0,0,0,0,0,0,0,0,0,0}
     color = nil
     proxSens = sim.createProximitySensor(sim.proximitysensor_ray_subtype, sim.objectspecialproperty_detectable_laser, options, intParam, floatParam, color)
 
 end
 
-sim.setObjectPosition(proxSens,baseDummyHandle,{0,0,1.5})
-result,data=sim.handleProximitySensor(proxSens_1)
+-- Step 4.2: set the position of promity sensor
+sim.setObjectName(proxSens,"pro_sensor_test_V1")
+pro_sensor_test_V1_handle = sim.getObjectHandle("pro_sensor_test_V1")
+
+--result,data=sim.handleProximitySensor(proxSens_1)
+--sim.getObjectOrientation(proxSens,baseDummyHandle)
+sim.setObjectOrientation(pro_sensor_test_V1_handle,baseDummyHandle,{-math.pi,0,0})
+
+-- Step 4.3: Change the position of the promity sensor
+count = 10
+Height = 3
+for i = 1,count do
+    if sim.setObjectPosition(proxSens,baseDummyHandle,{dummyPositions13[i][1],dummyPositions13[i][2],Height}) == 1 then
+        result,data=sim.handleProximitySensor(pro_sensor_test_V1_handle)
+    else
+        retult = -1
+    end
+    if result == 1 then
+        dummyPositions13[i]={dummyPositions13[i][1],dummyPositions13[i][2],Height-data}
+        end
+end
