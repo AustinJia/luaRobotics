@@ -7,7 +7,7 @@ end
 
 
 function _insertStuff (tableTemp,key,value)
-  tableTemp.key = value
+  tableTemp[key] = value
 end
 
 function _printTable(count,tableTemp)
@@ -73,5 +73,19 @@ for i = 1,count do
     objectHandles = sim.createDummy(dummyRadius,nil)
     sim.setObjectName(objectHandles,dummyObjectName)
     -- assign dummys' position
-    sim.setObjectPosition(objectHandles,objectHandles,baseDummyHandle,dummyPositions24[i])
+    sim.setObjectPosition(objectHandles,baseDummyHandle,dummyPositions24[i])
 end
+
+
+function sysCall_init()
+
+    options = 1
+    intParam = {0,0,0,0,0,0,0,0}
+    floatParam = {0,100,0,0,0,0,0,0,0,0,0,0,0,0,0}
+    color = nil
+    proxSens = sim.createProximitySensor(sim.proximitysensor_ray_subtype, sim.objectspecialproperty_detectable_laser, options, intParam, floatParam, color)
+
+end
+
+sim.setObjectPosition(proxSens,baseDummyHandle,{0,0,1.5})
+result,data=sim.handleProximitySensor(proxSens_1)
