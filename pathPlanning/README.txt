@@ -7,3 +7,4 @@ Generate dummy object for robot to follow under the V-rep software.
 ==
 required software:
 V-REP
+ROS
