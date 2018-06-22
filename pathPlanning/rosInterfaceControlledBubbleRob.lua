@@ -3,7 +3,7 @@ function sysCall_init()
     robotHandle=sim.getObjectAssociatedWithScript(sim.handle_self)
     leftMotor=sim.getObjectHandle("rosInterfaceControlledBubbleRobLeftMotor") -- Handle of the left motor
     rightMotor=sim.getObjectHandle("rosInterfaceControlledBubbleRobRightMotor") -- Handle of the right motor
-    noseSensor=sim.getObjectHandle("rosInterfaceControlledBubbleRobSensingNose") -- Handle of the proximity sensor
+    noseSensor=sim.getObjectHandle("rosInterfaceControlledBubbleRobSensingNose") -- Handle of the pro sensor
     -- Check if the required ROS plugin is there:
     moduleName=0
     moduleVersion=0
@@ -19,10 +19,10 @@ function sysCall_init()
     -- Ok now launch the ROS client application:
     if (not pluginNotFound) then
         local sysTime=sim.getSystemTimeInMs(-1) 
-        local leftMotorTopicName='leftMotorSpeed'..sysTime -- we add a random component so that we can have several instances of this robot running
-        local rightMotorTopicName='rightMotorSpeed'..sysTime -- we add a random component so that we can have several instances of this robot running
-        local sensorTopicName='sensorTrigger'..sysTime -- we add a random component so that we can have several instances of this robot running
-        local simulationTimeTopicName='simTime'..sysTime -- we add a random component so that we can have several instances of this robot running
+        local leftMotorTopicName='leftMotorSpeed'..sysTime
+        local rightMotorTopicName='rightMotorSpeed'..sysTime
+        local sensorTopicName='sensorTrigger'..sysTime
+        local simulationTimeTopicName='simTime'..sysTime
         -- Prepare the sensor publisher and the motor speed subscribers:
         sensorPub=simROS.advertise('/'..sensorTopicName,'std_msgs/Bool')
         simTimePub=simROS.advertise('/'..simulationTimeTopicName,'std_msgs/Float32')
