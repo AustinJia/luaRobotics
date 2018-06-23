@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d36c1aa7-b7b6-4ac9-b120-e06fb239d303" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/luaRobotics.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RosInterfaceControl_escapeObstacle/bubbleRos1.lua" beforeDir="false" afterPath="$PROJECT_DIR$/RosInterfaceControl_escapeObstacle/bubbleRos1.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RosInterfaceControl_escapeObstacle/bubbleRos2.lua" beforeDir="false" afterPath="$PROJECT_DIR$/RosInterfaceControl_escapeObstacle/bubbleRos2.lua" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +52,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="611" />
     <option name="y" value="23" />
     <option name="width" value="967" />
     <option name="height" value="768" />
@@ -166,8 +163,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="967" height="768" extended-state="0" />
-    <editor active="true" />
+    <frame x="611" y="23" width="967" height="768" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -178,10 +174,10 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32935917" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23681489" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24756756" />
       <window_info anchor="right" id="LuaJ" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
