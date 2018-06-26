@@ -9,16 +9,18 @@
 		- Add inertia
 		- Add mass
 -->
-  <!--Macros
+  <!--/////////////////////////////////////////////////////////MACROS DEFINITION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 	
 	Using xacro we can define macros to reduce repetition in the code and simplify the modification of URDF file.
     To generate the actual URDF file, run in a shell (roscore needed):
     	rosrun xacro xacro model.xacro > model.urdf
-	
-	Constants-->
+-->
+  <!--///////////////////////////////////////////////////////////Constants\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
   <!--Leg Macro-->
+  <!--////////////////////////////////////////////////////////ROBOT DEFINITION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
   <!--World-->
-  <link name="world"/>
+  <!--	<link name="world" />-->
   <!--Robot base-->
   <link name="walker_base">
     <visual>
@@ -234,10 +236,10 @@
       <origin rpy="1.57079632679 0 0" xyz="0 -0.15 0"/>
     </collision>
   </link>
-  <joint name="world_jt" type="floating">
-    <parent link="world"/>
-    <child link="walker_base"/>
-  </joint>
+  <!--	<joint name="world_jt" type="floating">-->
+  <!--		<parent link="world"/>-->
+  <!--		<child link="walker_base"/>-->
+  <!--	</joint>-->
   <joint name="joint_1_FL" type="continuous">
     <parent link="walker_base"/>
     <child link="link_1_FL"/>

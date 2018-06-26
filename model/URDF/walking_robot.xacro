@@ -124,7 +124,7 @@
 
 <!--////////////////////////////////////////////////////////ROBOT DEFINITION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 <!--World-->
-	<link name="world" />
+<!--	<link name="world" />-->
 
 <!--Robot base-->
 	<link name="walker_base">
@@ -143,10 +143,10 @@
 	<xacro:leg name="HL" color="${light_red}" r1="-1" r2="-1"/>
 	<xacro:leg name="HR" color="${light_red}" r1="1" r2="-1"/>
 
-	<joint name="world_jt" type="floating">
-		<parent link="world"/>
-		<child link="walker_base"/>
-	</joint>
+<!--	<joint name="world_jt" type="floating">-->
+<!--		<parent link="world"/>-->
+<!--		<child link="walker_base"/>-->
+<!--	</joint>-->
 
 	<xacro:joint_mac leg_name="FL" number="1" parent_="walker_base" child_="link_1_FL" r1="-1" r2="1" />
 	<xacro:joint_mac leg_name="FL" number="2" parent_="link_1_FL" child_="link_2_FL" r1="-1" r2="1" />
