@@ -1,0 +1,24 @@
+controller_list:
+  - name: fake_FL_controller
+    joints:
+      - joint_1_FL
+      - joint_2_FL
+      - joint_3_FL
+  - name: fake_FR_controller
+    joints:
+      - joint_1_FR
+      - joint_2_FR
+      - joint_3_FR
+  - name: fake_HR_controller
+    joints:
+      - joint_1_HR
+      - joint_2_HR
+      - joint_3_HR
+  - name: fake_Body_controller
+    joints:
+      - virtual_joint
+  - name: fake_HL_controller
+    joints:
+      - joint_1_HL
+      - joint_2_HL
+      - joint_3_HL

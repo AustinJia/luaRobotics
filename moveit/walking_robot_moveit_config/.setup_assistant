@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/maxens/Bureau/Stage/Code/XML/walking_robot.urdf
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/walking_robot.srdf
+  CONFIG:
+    author_name: Maxens ACHIEPI
+    author_email: maxens.achiepi@gmx.com
+    generated_timestamp: 1530021964
