@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!--Namespace specification, mandatory for the file to parse properly.-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="walking_robot">
+
+<!-- TODO:
+		- Add inertia
+		- Add mass
+-->
+
+
+<!--/////////////////////////////////////////////////////////MACROS DEFINITION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	
+	Using xacro we can define macros to reduce repetition in the code and simplify the modification of URDF file.
+    To generate the actual URDF file, run in a shell (roscore needed):
+    	rosrun xacro xacro model.xacro > model.urdf
+-->
+	
+<!--///////////////////////////////////////////////////////////Constants\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+
+	
+	<xacro:property name="body_width" value="0.15" />
+	<xacro:property name="body_length" value="0.3" />
+
+	<xacro:property name="leg_radius" value="0.02" />
+	<xacro:property name="link_1_length" value="0.1" />
+	<xacro:property name="link_2_length" value="0.15" />
+	<xacro:property name="link_3_length" value="0.3" />
+	<xacro:property name="tip_radius" value="0.03" />
+
+	<xacro:property name="light_red" value="1.0 0.5 0.5 1.0" />
+	<xacro:property name="light_green" value="0.5 1.0 0.5 1.0" />
+	<xacro:property name="light_blue" value="0.5 0.5 1.0 1.0" />
+	<xacro:property name="light_grey" value="0.43 0.43 0.43 1.0" />
+	
+	<!--Link Macro-->
+	<xacro:macro name="link_nb" params="name number color length r1 r2">
+		<link name = "link_${number}_${name}">
+
+			<visual>
+
+				<geometry>
+
+					<cylinder length="${length}" radius="${leg_radius}"/>
+
+				</geometry>
+				
+				<xacro:if value="${number == 1}">
+					<origin xyz = "0 ${r2*(link_1_length/2)} 0" rpy ="${pi/2} 0 0"/>
+				</xacro:if>
+
+				<xacro:if value="${number == 2}">
+					<origin xyz = "0 ${r2*(link_2_length/2)} 0" rpy ="${pi/2} 0 0"/>
+				</xacro:if>
+
+				<xacro:if value="${number == 3}">
+					<origin xyz = "0 ${r2*(link_3_length/2)} 0" rpy ="${pi/2} 0 0"/>
+				</xacro:if>
+
+				<material name="mat_${name}">
+
+					<color rgba="${color}"/>
+
+				</material>
+
+			</visual>
+
+
+			<collision>
+				<geometry>
+					<cylinder length="${length}" radius="${leg_radius}"/>
+				</geometry>
+
+				<xacro:if value="${number == 1}">
+					<origin xyz = "0 ${r2*(link_1_length/2)} 0" rpy ="${pi/2} 0 0"/>
+				</xacro:if>
+
+				<xacro:if value="${number == 2}">
+					<origin xyz = "0 ${r2*(link_2_length/2)} 0" rpy ="${pi/2} 0 0"/>
+				</xacro:if>
+
+				<xacro:if value="${number == 3}">
+					<origin xyz = "0 ${r2*(link_3_length/2)} 0" rpy ="${pi/2} 0 0"/>
+				
+				</xacro:if>
+
+			</collision>
+
+		</link>
+
+	</xacro:macro>
+
+	<!--Leg Macro-->
+
+	<xacro:macro name="leg" params="name color r1 r2">
+		<xacro:link_nb name="${name}" number = "1" color = "${color}" length="${link_1_length}" r1="${r1}" r2="${r2}"/>
+		<xacro:link_nb name="${name}" number = "2" color = "${color}" length="${link_2_length}" r1="${r1}" r2="${r2}"/>
+		<xacro:link_nb name="${name}" number = "3" color = "${color}" length="${link_3_length}" r1="${r1}" r2="${r2}"/>
+	</xacro:macro>
+
+<!--	Revolute Joint Macro-->
+	<xacro:macro name="joint_mac" params="leg_name number parent_ child_ r1 r2">
+		<joint name="joint_${number}_${leg_name}" type="continuous">
+			<parent link="${parent_}"/>
+			<child link ="${child_}"/>
+				
+		<xacro:if value="${number==1}">
+			<origin xyz = "${r1*body_width/2} ${r2*(body_length/2)} 0" rpy="0 0 0"/>
+			<axis xyz="0 0 ${r1*r2}" />
+		</xacro:if>
+
+		<xacro:if value="${number==2}">
+			<origin xyz = "0 ${r2*link_1_length} 0" rpy="0 0 0"/>
+			<axis xyz="${r2} 0 0" />
+		</xacro:if>
+
+		<xacro:if value="${number==3}">
+			<origin xyz = "0 ${r2*link_2_length} 0" rpy="0 0 0"/>
+			<axis xyz="${r2} 0 0" />
+		</xacro:if>
+
+		</joint>
+	</xacro:macro>
+
+<!--////////////////////////////////////////////////////////ROBOT DEFINITION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<!--World-->
+	<link name="world" />
+
+<!--Robot base-->
+	<link name="walker_base">
+		<visual>
+			<geometry>
+				<box size = "${body_width} ${body_length} 0.02"/>
+			</geometry>
+			<material name="mat">
+				<color rgba="0 0 0 1"/>
+			</material>
+		</visual>
+	</link>
+		
+	<xacro:leg name="FL" color="${light_red}" r1="-1" r2="1"/>
+	<xacro:leg name="FR" color="${light_red}" r1="1" r2="1"/>
+	<xacro:leg name="HL" color="${light_red}" r1="-1" r2="-1"/>
+	<xacro:leg name="HR" color="${light_red}" r1="1" r2="-1"/>
+
+	<joint name="world_jt" type="floating">
+		<parent link="world"/>
+		<child link="walker_base"/>
+	</joint>
+
+	<xacro:joint_mac leg_name="FL" number="1" parent_="walker_base" child_="link_1_FL" r1="-1" r2="1" />
+	<xacro:joint_mac leg_name="FL" number="2" parent_="link_1_FL" child_="link_2_FL" r1="-1" r2="1" />
+	<xacro:joint_mac leg_name="FL" number="3" parent_="link_2_FL" child_="link_3_FL" r1="-1" r2="1" />
+
+	<xacro:joint_mac leg_name="FR" number="1" parent_="walker_base" child_="link_1_FR" r1="1" r2="1" />
+	<xacro:joint_mac leg_name="FR" number="2" parent_="link_1_FR" child_="link_2_FR" r1="1" r2="1" />
+	<xacro:joint_mac leg_name="FR" number="3" parent_="link_2_FR" child_="link_3_FR" r1="1" r2="1" />
+
+	<xacro:joint_mac leg_name="HL" number="1" parent_="walker_base" child_="link_1_HL" r1="-1" r2="-1" />
+	<xacro:joint_mac leg_name="HL" number="2" parent_="link_1_HL" child_="link_2_HL" r1="-1" r2="-1" />
+	<xacro:joint_mac leg_name="HL" number="3" parent_="link_2_HL" child_="link_3_HL" r1="-1" r2="-1" />
+
+	<xacro:joint_mac leg_name="HR" number="1" parent_="walker_base" child_="link_1_HR" r1="1" r2="-1" />
+	<xacro:joint_mac leg_name="HR" number="2" parent_="link_1_HR" child_="link_2_HR" r1="1" r2="-1" />
+	<xacro:joint_mac leg_name="HR" number="3" parent_="link_2_HR" child_="link_3_HR" r1="1" r2="-1" />
+	
+
+</robot>
