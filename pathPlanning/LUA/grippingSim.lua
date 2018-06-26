@@ -12,19 +12,10 @@ end
 
 function sysCall_sensing()
 
-	-- GRIPPING SIMULATION PROCEDURE
-		-- Get "EndOfMove" trigger by controller. This means the controller believes he sent the foot to the right position
-		-- Check for terrain presence through proximity sensor
-		-- If terrain found
-			-- A) Create dummy on terrain then connect to it
-			-- OR
-			-- B) Connect to the nearest already existing dummy
-		-- If terrain not found
-			-- End? Recuperation procedure?
-
+	--result,distance,det_pt,det_obj_hdl,det_surf_norm = sim.handleProximitySensor(prox_FL)
 	res_FL,dist_FL,det_pt_FL = sim.checkProximitySensor(prox_FL,cub)
-	if (dist_FL~=nil) and (dist_FL-0.05 < 0.002) then -- we detect the cube in front of the foot
-		-- we connect to already existing dummy (carefully placed at the right position)
+	if res_FL>0 then -- we detect the cube in front of the foot
+		-- we connect
 		sim.setLinkDummy(dummy_tip_FL,tar)
 		sim.setObjectInt32Parameter(dummy_tip_FL,sim.dummyintparam_link_type,0)
 
