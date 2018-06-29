@@ -90,6 +90,23 @@
 
 	</xacro:macro>
 
+	<!-- Leg Tip Macro -->
+	<xacro:macro name="leg_tip" params="leg_name">
+		<link name="tip_${leg_name}">
+			<visual>
+				<geometry>
+					<sphere radius="${tip_radius}" />
+				</geometry>
+				<material name="mat_${leg_name}" />
+			</visual>
+			<collision>
+				<geometry>
+					<sphere radius="${tip_radius}" />
+				</geometry>
+			</collision>
+		</link>
+	</xacro:macro>
+
 	<!--Leg Macro-->
 
 	<xacro:macro name="leg" params="name color r1 r2">
@@ -122,6 +139,15 @@
 		</joint>
 	</xacro:macro>
 
+	<!-- Fixed Joint Macro -->
+	<xacro:macro name="tip_jt" params="leg_name r2">
+		<joint name="${leg_name}_tip_joint" type="fixed">
+			<parent link="link_3_${leg_name}" />
+			<child link="tip_${leg_name}" />
+			<origin xyz="0 ${r2*link_3_length} 0"/>
+		</joint>
+	</xacro:macro>
+
 <!--////////////////////////////////////////////////////////ROBOT DEFINITION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 <!--World-->
 <!--	<link name="world" />-->
@@ -143,6 +169,11 @@
 	<xacro:leg name="HL" color="${light_red}" r1="-1" r2="-1"/>
 	<xacro:leg name="HR" color="${light_red}" r1="1" r2="-1"/>
 
+	<xacro:leg_tip leg_name="FL" />
+	<xacro:leg_tip leg_name="FR" />
+	<xacro:leg_tip leg_name="HL" />
+	<xacro:leg_tip leg_name="HR" />
+
 <!--	<joint name="world_jt" type="floating">-->
 <!--		<parent link="world"/>-->
 <!--		<child link="walker_base"/>-->
@@ -163,6 +194,11 @@
 	<xacro:joint_mac leg_name="HR" number="1" parent_="walker_base" child_="link_1_HR" r1="1" r2="-1" />
 	<xacro:joint_mac leg_name="HR" number="2" parent_="link_1_HR" child_="link_2_HR" r1="1" r2="-1" />
 	<xacro:joint_mac leg_name="HR" number="3" parent_="link_2_HR" child_="link_3_HR" r1="1" r2="-1" />
+
+	<xacro:tip_jt leg_name="FL" r2="1" />
+	<xacro:tip_jt leg_name="FR" r2="1" />
+	<xacro:tip_jt leg_name="HL" r2="-1" />
+	<xacro:tip_jt leg_name="HR" r2="-1" />
 	
 
 </robot>

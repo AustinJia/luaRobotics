@@ -236,6 +236,58 @@
       <origin rpy="1.57079632679 0 0" xyz="0 -0.15 0"/>
     </collision>
   </link>
+  <link name="tip_FL">
+    <visual>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <material name="mat_FL"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tip_FR">
+    <visual>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <material name="mat_FR"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tip_HL">
+    <visual>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <material name="mat_HL"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tip_HR">
+    <visual>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <material name="mat_HR"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+    </collision>
+  </link>
   <!--	<joint name="world_jt" type="floating">-->
   <!--		<parent link="world"/>-->
   <!--		<child link="walker_base"/>-->
@@ -311,5 +363,25 @@
     <child link="link_3_HR"/>
     <origin rpy="0 0 0" xyz="0 -0.15 0"/>
     <axis xyz="-1 0 0"/>
+  </joint>
+  <joint name="FL_tip_joint" type="fixed">
+    <parent link="link_3_FL"/>
+    <child link="tip_FL"/>
+    <origin xyz="0 0.3 0"/>
+  </joint>
+  <joint name="FR_tip_joint" type="fixed">
+    <parent link="link_3_FR"/>
+    <child link="tip_FR"/>
+    <origin xyz="0 0.3 0"/>
+  </joint>
+  <joint name="HL_tip_joint" type="fixed">
+    <parent link="link_3_HL"/>
+    <child link="tip_HL"/>
+    <origin xyz="0 -0.3 0"/>
+  </joint>
+  <joint name="HR_tip_joint" type="fixed">
+    <parent link="link_3_HR"/>
+    <child link="tip_HR"/>
+    <origin xyz="0 -0.3 0"/>
   </joint>
 </robot>

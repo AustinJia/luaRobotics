@@ -1,0 +1,53 @@
+digraph G {
+node [shape=box];
+"walker_base" [label="walker_base"];
+"link_1_FL" [label="link_1_FL"];
+"link_2_FL" [label="link_2_FL"];
+"link_3_FL" [label="link_3_FL"];
+"tip_FL" [label="tip_FL"];
+"link_1_FR" [label="link_1_FR"];
+"link_2_FR" [label="link_2_FR"];
+"link_3_FR" [label="link_3_FR"];
+"tip_FR" [label="tip_FR"];
+"link_1_HL" [label="link_1_HL"];
+"link_2_HL" [label="link_2_HL"];
+"link_3_HL" [label="link_3_HL"];
+"tip_HL" [label="tip_HL"];
+"link_1_HR" [label="link_1_HR"];
+"link_2_HR" [label="link_2_HR"];
+"link_3_HR" [label="link_3_HR"];
+"tip_HR" [label="tip_HR"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"walker_base" -> "joint_1_FL" [label="xyz: -0.075 0.15 0 \nrpy: 0 -0 0"]
+"joint_1_FL" -> "link_1_FL"
+"link_1_FL" -> "joint_2_FL" [label="xyz: 0 0.1 0 \nrpy: 0 -0 0"]
+"joint_2_FL" -> "link_2_FL"
+"link_2_FL" -> "joint_3_FL" [label="xyz: 0 0.15 0 \nrpy: 0 -0 0"]
+"joint_3_FL" -> "link_3_FL"
+"link_3_FL" -> "FL_tip_joint" [label="xyz: 0 0.3 0 \nrpy: 0 -0 0"]
+"FL_tip_joint" -> "tip_FL"
+"walker_base" -> "joint_1_FR" [label="xyz: 0.075 0.15 0 \nrpy: 0 -0 0"]
+"joint_1_FR" -> "link_1_FR"
+"link_1_FR" -> "joint_2_FR" [label="xyz: 0 0.1 0 \nrpy: 0 -0 0"]
+"joint_2_FR" -> "link_2_FR"
+"link_2_FR" -> "joint_3_FR" [label="xyz: 0 0.15 0 \nrpy: 0 -0 0"]
+"joint_3_FR" -> "link_3_FR"
+"link_3_FR" -> "FR_tip_joint" [label="xyz: 0 0.3 0 \nrpy: 0 -0 0"]
+"FR_tip_joint" -> "tip_FR"
+"walker_base" -> "joint_1_HL" [label="xyz: -0.075 -0.15 0 \nrpy: 0 -0 0"]
+"joint_1_HL" -> "link_1_HL"
+"link_1_HL" -> "joint_2_HL" [label="xyz: 0 -0.1 0 \nrpy: 0 -0 0"]
+"joint_2_HL" -> "link_2_HL"
+"link_2_HL" -> "joint_3_HL" [label="xyz: 0 -0.15 0 \nrpy: 0 -0 0"]
+"joint_3_HL" -> "link_3_HL"
+"link_3_HL" -> "HL_tip_joint" [label="xyz: 0 -0.3 0 \nrpy: 0 -0 0"]
+"HL_tip_joint" -> "tip_HL"
+"walker_base" -> "joint_1_HR" [label="xyz: 0.075 -0.15 0 \nrpy: 0 -0 0"]
+"joint_1_HR" -> "link_1_HR"
+"link_1_HR" -> "joint_2_HR" [label="xyz: 0 -0.1 0 \nrpy: 0 -0 0"]
+"joint_2_HR" -> "link_2_HR"
+"link_2_HR" -> "joint_3_HR" [label="xyz: 0 -0.15 0 \nrpy: 0 -0 0"]
+"joint_3_HR" -> "link_3_HR"
+"link_3_HR" -> "HR_tip_joint" [label="xyz: 0 -0.3 0 \nrpy: 0 -0 0"]
+"HR_tip_joint" -> "tip_HR"
+}
