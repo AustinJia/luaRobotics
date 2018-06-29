@@ -1,24 +1,53 @@
 controller_list:
-  - name: fake_FL_controller
+  - name: fake_leg_FL_controller
     joints:
       - joint_1_FL
       - joint_2_FL
       - joint_3_FL
-  - name: fake_FR_controller
+  - name: fake_leg_FR_controller
     joints:
       - joint_1_FR
       - joint_2_FR
       - joint_3_FR
-  - name: fake_HR_controller
-    joints:
-      - joint_1_HR
-      - joint_2_HR
-      - joint_3_HR
-  - name: fake_Body_controller
-    joints:
-      - virtual_joint
-  - name: fake_HL_controller
+  - name: fake_leg_HL_controller
     joints:
       - joint_1_HL
       - joint_2_HL
       - joint_3_HL
+  - name: fake_leg_HR_controller
+    joints:
+      - joint_1_HR
+      - joint_2_HR
+      - joint_3_HR
+  - name: fake_body_move_controller
+    joints:
+      - world_joint
+  - name: fake_all_legs_controller
+    joints:
+      - joint_1_FL
+      - joint_2_FL
+      - joint_3_FL
+      - joint_1_FR
+      - joint_2_FR
+      - joint_3_FR
+      - joint_1_HL
+      - joint_2_HL
+      - joint_3_HL
+      - joint_1_HR
+      - joint_2_HR
+      - joint_3_HR
+  - name: fake_body_and_legs_controller
+    joints:
+      - world_joint
+      - joint_1_FL
+      - joint_2_FL
+      - joint_3_FL
+      - joint_1_FR
+      - joint_2_FR
+      - joint_3_FR
+      - joint_1_HL
+      - joint_2_HL
+      - joint_3_HL
+      - joint_1_HR
+      - joint_2_HR
+      - joint_3_HR

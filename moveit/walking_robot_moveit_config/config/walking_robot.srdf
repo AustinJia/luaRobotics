@@ -9,73 +9,99 @@
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
-    <group name="FL">
-        <joint name="joint_1_FL" />
-        <joint name="joint_2_FL" />
-        <joint name="joint_3_FL" />
+    <group name="leg_FL">
+        <link name="link_1_FL" />
+        <link name="link_2_FL" />
+        <link name="link_3_FL" />
+        <link name="tip_FL" />
     </group>
-    <group name="FR">
-        <joint name="joint_1_FR" />
-        <joint name="joint_2_FR" />
-        <joint name="joint_3_FR" />
+    <group name="leg_FR">
+        <link name="link_1_FR" />
+        <link name="link_2_FR" />
+        <link name="link_3_FR" />
+        <link name="tip_FR" />
     </group>
-    <group name="HR">
-        <joint name="joint_1_HR" />
-        <joint name="joint_2_HR" />
-        <joint name="joint_3_HR" />
+    <group name="leg_HL">
+        <link name="link_1_HL" />
+        <link name="link_2_HL" />
+        <link name="link_3_HL" />
+        <link name="tip_HL" />
     </group>
-    <group name="HL">
-        <joint name="joint_1_HL" />
-        <joint name="joint_2_HL" />
-        <joint name="joint_3_HL" />
+    <group name="leg_HR">
+        <link name="link_1_HR" />
+        <link name="link_2_HR" />
+        <link name="link_3_HR" />
+        <link name="tip_HR" />
     </group>
-	<group name="Body">
-        <joint name="virtual_joint" />
+    <group name="body_move">
+        <link name="walker_base" />
     </group>
-	<group name="Legs">
-		<group name="FL"/>
-		<group name="FR"/>
-		<group name="HR"/>
-		<group name="HL"/>
+    <group name="all_legs">
+        <link name="link_1_FL" />
+        <link name="link_2_FL" />
+        <link name="link_3_FL" />
+        <link name="tip_FL" />
+        <link name="link_1_FR" />
+        <link name="link_2_FR" />
+        <link name="link_3_FR" />
+        <link name="tip_FR" />
+        <link name="link_1_HL" />
+        <link name="link_2_HL" />
+        <link name="link_3_HL" />
+        <link name="tip_HL" />
+        <link name="link_1_HR" />
+        <link name="link_2_HR" />
+        <link name="link_3_HR" />
+        <link name="tip_HR" />
     </group>
-    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="Default" group="Legs">
-        <joint name="joint_1_FL" value="-0.5235" />
-        <joint name="joint_2_FL" value="1.0471" />
-        <joint name="joint_3_FL" value="-2.0943" />
-        <joint name="joint_1_FR" value="-0.5235" />
-        <joint name="joint_2_FR" value="1.0471" />
-        <joint name="joint_3_FR" value="-2.0943" />
-        <joint name="joint_1_HR" value="-0.5235" />
-        <joint name="joint_2_HR" value="1.0471" />
-        <joint name="joint_3_HR" value="-2.0943" />
-        <joint name="joint_1_HL" value="-0.5235" />
-        <joint name="joint_2_HL" value="1.0471" />
-        <joint name="joint_3_HL" value="-2.0943" />
-    </group_state>
+    <group name="body_and_legs">
+        <link name="walker_base" />
+        <link name="link_1_FL" />
+        <link name="link_2_FL" />
+        <link name="link_3_FL" />
+        <link name="tip_FL" />
+        <link name="link_1_FR" />
+        <link name="link_2_FR" />
+        <link name="link_3_FR" />
+        <link name="tip_FR" />
+        <link name="link_1_HL" />
+        <link name="link_2_HL" />
+        <link name="link_3_HL" />
+        <link name="tip_HL" />
+        <link name="link_1_HR" />
+        <link name="link_2_HR" />
+        <link name="link_3_HR" />
+        <link name="tip_HR" />
+    </group>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="virtual_joint" type="floating" parent_frame="world" child_link="walker_base" />
-
-	<group name="whole_body">
-		<group name="legs"/>
-		<joint name="virtual_joint"/>
-    </group>
-
+    <virtual_joint name="world_joint" type="floating" parent_frame="world" child_link="walker_base" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="link_1_FL" link2="link_1_HL" reason="Never" />
     <disable_collisions link1="link_1_FL" link2="link_1_HR" reason="Never" />
     <disable_collisions link1="link_1_FL" link2="link_2_FL" reason="Adjacent" />
+    <disable_collisions link1="link_1_FL" link2="tip_FL" reason="Never" />
     <disable_collisions link1="link_1_FL" link2="walker_base" reason="Adjacent" />
     <disable_collisions link1="link_1_FR" link2="link_1_HL" reason="Never" />
     <disable_collisions link1="link_1_FR" link2="link_1_HR" reason="Never" />
     <disable_collisions link1="link_1_FR" link2="link_2_FR" reason="Adjacent" />
+    <disable_collisions link1="link_1_FR" link2="tip_FR" reason="Never" />
     <disable_collisions link1="link_1_FR" link2="walker_base" reason="Adjacent" />
     <disable_collisions link1="link_1_HL" link2="link_2_HL" reason="Adjacent" />
+    <disable_collisions link1="link_1_HL" link2="tip_HL" reason="Never" />
     <disable_collisions link1="link_1_HL" link2="walker_base" reason="Adjacent" />
     <disable_collisions link1="link_1_HR" link2="link_2_HR" reason="Adjacent" />
+    <disable_collisions link1="link_1_HR" link2="tip_HR" reason="Never" />
     <disable_collisions link1="link_1_HR" link2="walker_base" reason="Adjacent" />
     <disable_collisions link1="link_2_FL" link2="link_3_FL" reason="Adjacent" />
+    <disable_collisions link1="link_2_FL" link2="tip_FL" reason="Never" />
     <disable_collisions link1="link_2_FR" link2="link_3_FR" reason="Adjacent" />
+    <disable_collisions link1="link_2_FR" link2="tip_FR" reason="Never" />
     <disable_collisions link1="link_2_HL" link2="link_3_HL" reason="Adjacent" />
+    <disable_collisions link1="link_2_HL" link2="tip_HL" reason="Never" />
     <disable_collisions link1="link_2_HR" link2="link_3_HR" reason="Adjacent" />
+    <disable_collisions link1="link_2_HR" link2="tip_HR" reason="Never" />
+    <disable_collisions link1="link_3_FL" link2="tip_FL" reason="Adjacent" />
+    <disable_collisions link1="link_3_FR" link2="tip_FR" reason="Adjacent" />
+    <disable_collisions link1="link_3_HL" link2="tip_HL" reason="Adjacent" />
+    <disable_collisions link1="link_3_HR" link2="tip_HR" reason="Adjacent" />
 </robot>
