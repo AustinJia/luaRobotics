@@ -37,8 +37,8 @@ function sysCall_init() -- this part will be executed one time just at the begin
 	r,terrain_Y_min = sim.getObjectFloatParameter(heightfield,sim.objfloatparam_objbbox_min_x)
 	terrain_Y = terrain_Y_max-terrain_Y_min
 
-	Kx = 20 -- number of grid points in x direction
-	Ky = 20 -- number of grid points in y direction
+	Kx = 40 -- number of grid points in x direction
+	Ky = 40 -- number of grid points in y direction
 
 	incX = terrain_X/Kx -- increment on X axis
 	incY = terrain_Y/Ky -- increment on Y axis
@@ -47,7 +47,7 @@ function sysCall_init() -- this part will be executed one time just at the begin
 	Y = terrain_Y_min + 0.001
 
 	-- dummy size
-	size = 0.1
+	size = 0.05
 	dum_tab = {} -- array of dummy handles
 	k = 1
 	
@@ -66,10 +66,11 @@ function sysCall_init() -- this part will be executed one time just at the begin
 			sim.setObjectPosition(pro_sensor,-1,pro_pos)
 
 			result,distance,det_pt = sim.checkProximitySensor(pro_sensor,heightfield)
-			distance = distance - dec
 
-			if result then
+			if result>0 then
+                distance = distance - dec
 				dum_tab[k] = sim.createDummy(size)
+                sim.setObjectInt32Parameter(dum_tab[k],sim.objintparam_visibility_layer,256)
 				sim.setObjectPosition(dum_tab[k],-1,{X,Y,distance})
 				k = k+1
 			end
