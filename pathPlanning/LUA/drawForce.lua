@@ -28,14 +28,14 @@ function sysCall_init()
 	emission = nil
 
 	-- init some variables (fXX = force, tXX = torque, pTip_XX = position of tip, mat_XX = transformation matrix)
-	fFR = {}
-	tFR = {}
-	fHR = {}
-	tHR = {}
-	fFL = {}
-	tFL = {}
-	fHL = {}
-	tHL = {}
+	fFR = {0,0,0}
+	tFR = {0,0,0}
+	fHR = {0,0,0}
+	tHR = {0,0,0}
+	fFL = {0,0,0}
+	tFL = {0,0,0}
+	fHL = {0,0,0}
+	tHL = {0,0,0}
 	pTip_FR = {}
 	pTip_HR = {}
 	pTip_FL = {}
@@ -52,7 +52,7 @@ function sysCall_init()
 	vectorHL = sim.addDrawingObject(attrib,size,duplicateTolerance,tip_HL,maxItemCount,color,specular,emission)
 
 	-- read script parameters
-	draw = sim.getScriptSimulationParameter(sim_handle_self,"drawForce")
+	draw = sim.getScriptSimulationParameter(sim.handle_self,"drawForce")
 
 end
 
@@ -72,10 +72,22 @@ function sysCall_sensing()
 		-- we don't care about the value of torque (for the moment?)
 
 		-- it is normal to get warnings at beginning of sim if there is "Median" or "Average" checked in sensor dialog
+        -- !!!!!! -> not true anymore, see "if not fFR then"
 		result,fFR,tFR = sim.readForceSensor(force_FR)
 		result,fHR,tHR = sim.readForceSensor(force_HR)
 		result,fFL,tFL = sim.readForceSensor(force_FL)
 		result,fHL,tHL = sim.readForceSensor(force_HL)
+
+        if not fFR then
+            fFR = {0,0,0}
+            tFR = {0,0,0}
+            fHR = {0,0,0}
+            tHR = {0,0,0}
+            fFL = {0,0,0}
+            tFL = {0,0,0}
+            fHL = {0,0,0}
+            tHL = {0,0,0}
+        end
 	
 		-- put the force readings back into reference frame	
 		-- first get transformation matrices of the force sensor frames wrt the reference frame
@@ -115,7 +127,7 @@ function sysCall_sensing()
 		scalFact = 0.001
 	
 		-- Front Right
-		pTip_FR = simGetObjectPosition(tip_FR,-1)
+		pTip_FR = sim.getObjectPosition(tip_FR,-1)
 
 		fFR[1] = fFR[1]*scalFact + pTip_FR[1]
 		table.insert(pTip_FR,fFR[1])
@@ -127,7 +139,7 @@ function sysCall_sensing()
 		table.insert(pTip_FR,fFR[3])
 
 		-- Hind Right
-		pTip_HR = simGetObjectPosition(tip_HR,-1)
+		pTip_HR = sim.getObjectPosition(tip_HR,-1)
 
 		fHR[1] = fHR[1]*scalFact + pTip_HR[1]
 		table.insert(pTip_HR,fHR[1])
@@ -139,7 +151,7 @@ function sysCall_sensing()
 		table.insert(pTip_HR,fHR[3])
 
 		-- Front Left
-		pTip_FL = simGetObjectPosition(tip_FL,-1)
+		pTip_FL = sim.getObjectPosition(tip_FL,-1)
 
 		fFL[1] = fFL[1]*scalFact + pTip_FL[1]
 		table.insert(pTip_FL,fFL[1])
@@ -151,7 +163,7 @@ function sysCall_sensing()
 		table.insert(pTip_FL,fFL[3])
 	
 		-- Hind Left
-		pTip_HL = simGetObjectPosition(tip_HL,-1)
+		pTip_HL = sim.getObjectPosition(tip_HL,-1)
 
 		fHL[1] = fHL[1]*scalFact + pTip_HL[1]
 		table.insert(pTip_HL,fHL[1])
